@@ -10,11 +10,21 @@ class _LoginPageState extends State<LoginPage> {
   // TODO: Add text editing controllers (101)
   @override
   Widget build(BuildContext context) {
+    Widget blueCircle = new Container(
+      alignment: Alignment.center,
+      width: 600,
+      height: 600,
+      decoration: new BoxDecoration(
+        color: kClubhubBlue300,
+        shape: BoxShape.circle,
+      ),
+    );
+
     return Scaffold(
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
+        child: Stack(
           children: <Widget>[
+            //blueCircle,
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[
@@ -53,7 +63,9 @@ class _LoginPageState extends State<LoginPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(18.0)),
                   ),
-                  child: Text('SIGUIENTE'),
+                  child: Center(
+                    child: Text('SIGUIENTE'),
+                  ),
                   onPressed: () {
                     // Navigator.pop(context);
                   },
