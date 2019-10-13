@@ -1,26 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:pruebais/Calendario.dart';
+import 'package:pruebais/invitaciones.dart';
+import 'package:pruebais/principal.dart';
+import 'package:pruebais/Reservaciones.dart';
+//import 'package:pruebais/routes.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class MyApp extends StatefulWidget {
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  int _currentIndex = 0;
+  Widget callPage(int currentIndex) {
+    switch (currentIndex) {
+      case 0:
+        return Principal();
+      case 1:
+        return Invitaciones();
+      case 2:
+        return Calendario();
+      case 3:
+        return Reservaciones();
+
+        break;
+      default:
+        return Principal();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+      title: 'scaffold Example',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Club Puerto Azul'),
+        ),
+        body: callPage(_currentIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          onTap: (value) {
+            _currentIndex = value;
+            setState(() {});
+          },
+          items: [
+            BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                icon: Icon(Icons.home), //ICONO DE HOME
+                title: Text('Principal')),
+            BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                icon: Icon(Icons.person_add),
+                title: Text('Invitaciones') // ICONO INVITACIONES
+                ),
+            BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                icon: Icon(Icons.calendar_today),
+                title: Text('Calendario') //ICONO CALENDARIO
+                ),
+            BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                icon: Icon(Icons.hotel),
+                title: Text('Reservaciones') //ICONO RESERVACIONES
+                )
+          ],
+        ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
