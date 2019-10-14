@@ -7,73 +7,84 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // TODO: Add text editing controllers (101)
-  @override
-  Widget build(BuildContext context) {
-    Widget blueCircle = new Container(
-      alignment: Alignment.center,
-      width: 600,
-      height: 600,
+  Widget blueCircle = new Transform.scale(
+    scale: 3.4,
+    child: Container(
+      transform: Matrix4.translationValues(0.0, -200.0, 0.0),
+      width: 30.0,
+      height: 30.0,
       decoration: new BoxDecoration(
-        color: kClubhubBlue300,
+        color: kClubhubBlue400,
         shape: BoxShape.circle,
       ),
-    );
+    ),
+  );
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            //blueCircle,
-            SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/diamond.png'),
-                SizedBox(height: 16.0),
-                Text('CLUBHUB'),
-              ],
-            ),
-            SizedBox(height: 180.0),
-            //[Username]
-            AccentColorOverride(
-              color: kClubhubBlue900,
-              child: TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                ),
-              ),
-            ),
-            SizedBox(height: 24.0),
-            //[Password]
-            AccentColorOverride(
-              color: kClubhubBlue900,
-              child: TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                ),
-                obscureText: true,
-              ),
-            ),
-            ButtonBar(
-              children: <Widget>[
-                RaisedButton(
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(18.0)),
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: true,
+      body: Stack(
+        fit: StackFit.expand, //revisar esta propiedad
+        children: <Widget>[
+          blueCircle,
+          Padding(
+              padding: EdgeInsets.fromLTRB(60, 0, 60, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/logo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(13.0)
+                    ),
                   ),
-                  child: Center(
-                    child: Text('SIGUIENTE'),
+                  Text("Inicio de sesión", 
+                    style: TextStyle(
+                      fontSize: 20,
+                    ), 
                   ),
-                  onPressed: () {
-                    // Navigator.pop(context);
-                  },
-                )
-              ],
-            ),
-          ],
-        ),
+                  SizedBox(height: 70),
+                  TextField(
+                    decoration: InputDecoration(
+                      filled: false,
+                      labelText: "Número de acción",
+                    ),
+                  ),
+                  SizedBox(height: 70),
+                  TextField(
+                    decoration: InputDecoration(
+                      filled: false,
+                      labelText: "Contraseña",
+                    ),
+                    obscureText: true,
+                  ),
+                  ButtonBar(
+                    alignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      RaisedButton(
+                        textColor: Colors.white,
+                        color: Colors.black,
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
+                          child: Text("Ingresar", style: TextStyle(fontSize: 18.0),),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(35.0),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )),
+        ],
       ),
     );
   }
