@@ -3,6 +3,7 @@ import 'package:pruebais/Calendario.dart';
 import 'package:pruebais/invitaciones.dart';
 import 'package:pruebais/principal.dart';
 import 'package:pruebais/Reservaciones.dart';
+import 'Reservaciones.dart';
 //import 'package:pruebais/routes.dart';
 
 void main() => runApp(new MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
+  
   int _currentIndex = 0;
   Widget callPage(int currentIndex) {
     switch (currentIndex) {
@@ -36,9 +38,10 @@ class MyAppState extends State<MyApp> {
       title: 'scaffold Example',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Club Puerto Azul'),
+          title: Text(''),
         ),
         body: callPage(_currentIndex),
+        drawer: invokeDrawer(),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (value) {
@@ -155,4 +158,52 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+Widget invokeDrawer() {
+  return Drawer(
+    child: new ListView(
+      children: <Widget>[
+        UserAccountsDrawerHeader(
+          accountName: Text("Valeska De Ponte"),
+          accountEmail: Text("Valeskadeponte@prueba.es"),
+          currentAccountPicture: CircleAvatar(backgroundColor: Colors.white),
+          decoration: BoxDecoration(
+            color: Colors.lightBlue,
+          ),
+        ),
+        ListTile(
+          title: Text('precio de invitaciones'),
+          leading: Icon(Icons.info),
+        ),
+        ListTile(
+          title: Text('Historial de Pagos'),
+          leading: Icon(Icons.payment),
+        ),
+        ListTile(
+          title: Text('Historial de visitas'),
+          leading: Icon(Icons.visibility),
+        ),
+        ListTile(
+          title: Text('Historial de invitados'),
+          leading: Icon(Icons.person_pin),
+        ),
+        ListTile(
+          title: Text('Configuracion de cuenta'),
+          leading: Icon(Icons.new_releases),
+        ),
+        ListTile(
+          title: Text('soporte al cliente'),
+          leading: Icon(Icons.help),
+        ),
+        ListTile(
+          title: Text('cerrar sesion'),
+          leading: Icon(Icons.close),
+          onTap: () {
+            Reservaciones();
+          },
+        ),
+      ],
+    ),
+  );
 }
