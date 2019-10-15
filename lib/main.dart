@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pruebais/Calendario.dart';
 import 'package:pruebais/invitaciones.dart';
 import 'package:pruebais/principal.dart';
+import 'package:pruebais/login.dart';
 import 'package:pruebais/Reservaciones.dart';
 import 'Reservaciones.dart';
 //import 'package:pruebais/routes.dart';
@@ -13,7 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  
   int _currentIndex = 0;
   Widget callPage(int currentIndex) {
     switch (currentIndex) {
@@ -36,40 +36,46 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'scaffold Example',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(''),
-        ),
-        body: callPage(_currentIndex),
-        drawer: invokeDrawer(),
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (value) {
-            _currentIndex = value;
-            setState(() {});
-          },
-          items: [
-            BottomNavigationBarItem(
-                backgroundColor: Colors.blue,
-                icon: Icon(Icons.home), //ICONO DE HOME
-                title: Text('Principal')),
-            BottomNavigationBarItem(
-                backgroundColor: Colors.blue,
-                icon: Icon(Icons.person_add),
-                title: Text('Invitaciones') // ICONO INVITACIONES
-                ),
-            BottomNavigationBarItem(
-                backgroundColor: Colors.blue,
-                icon: Icon(Icons.calendar_today),
-                title: Text('Calendario') //ICONO CALENDARIO
-                ),
-            BottomNavigationBarItem(
-                backgroundColor: Colors.blue,
-                icon: Icon(Icons.hotel),
-                title: Text('Reservaciones') //ICONO RESERVACIONES
-                )
-          ],
-        ),
+      home: MainMenu(),
+      initialRoute: '/login',
+      onGenerateRoute: _getRoute,
+    );
+  }
+
+  Widget MainMenu() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(''),
+      ),
+      body: callPage(_currentIndex),
+      drawer: invokeDrawer(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          _currentIndex = value;
+          setState(() {});
+        },
+        items: [
+          BottomNavigationBarItem(
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.home), //ICONO DE HOME
+              title: Text('Principal')),
+          BottomNavigationBarItem(
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.person_add),
+              title: Text('Invitaciones') // ICONO INVITACIONES
+              ),
+          BottomNavigationBarItem(
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.calendar_today),
+              title: Text('Calendario') //ICONO CALENDARIO
+              ),
+          BottomNavigationBarItem(
+              backgroundColor: Colors.blue,
+              icon: Icon(Icons.hotel),
+              title: Text('Reservaciones') //ICONO RESERVACIONES
+              )
+        ],
       ),
     );
   }
@@ -77,15 +83,6 @@ class MyAppState extends State<MyApp> {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -159,6 +156,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+Route<dynamic> _getRoute(RouteSettings settings) {
+    if (settings.name != '/login') {
+      return null;
+    }
+
+    return MaterialPageRoute<void>(
+      settings: settings,
+      builder: (BuildContext context) => LoginPage(),
+      fullscreenDialog: true,
+    );
+  }
 
 Widget invokeDrawer() {
   return Drawer(

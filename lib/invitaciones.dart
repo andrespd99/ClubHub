@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'addFriend.dart';
 import 'invitationCheckout.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:async';
-import 'dart:convert';
-
 
 var invitedList = <String>[];
 var friendsList = List<String>.generate(6, (i) => "Amigo $i");
@@ -19,20 +15,6 @@ class Invitaciones extends StatefulWidget {
 }
 
 class InvitacionesState extends State<Invitaciones> {
-
-  List data;
-  Future<String> loadJsonData() async{
-    var jsonText = await rootBundle.loadString('assets/MOCK_DATA.json');
-    setState(() {
-      data = json.decode(jsonText); 
-    });
-    print(jsonText);
-  }
-  
-  @override
-  void initState(){
-    this.loadJsonData();
-  }
 
   @override
   Widget build(BuildContext context) {
