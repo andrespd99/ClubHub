@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pruebais/Calendario.dart';
+import 'package:pruebais/add_socio.dart';
+import 'package:pruebais/admin_panel.dart';
 import 'package:pruebais/invitaciones.dart';
+import 'package:pruebais/listasocios_page.dart';
 import 'package:pruebais/principal.dart';
 import 'package:pruebais/Reservaciones.dart';
 //import 'package:pruebais/routes.dart';
@@ -23,6 +26,8 @@ class MyAppState extends State<MyApp> {
         return Calendario();
       case 3:
         return Reservaciones();
+      case 4:
+        return AdminPanel();
 
         break;
       default:
@@ -34,6 +39,11 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'scaffold Example',
+      routes: {   
+      // Cuando naveguemos hacia esta ruta , crearemos el Widget addsocio
+      '/add-socio': (context) => AddSocio(),
+      '/listasociospage': (context) => ListasPage(),
+  },
       home: Scaffold(
         appBar: AppBar(
           title: Text('Club Puerto Azul'),
@@ -64,6 +74,11 @@ class MyAppState extends State<MyApp> {
                 backgroundColor: Colors.blue,
                 icon: Icon(Icons.hotel),
                 title: Text('Reservaciones') //ICONO RESERVACIONES
+                ),
+                BottomNavigationBarItem(
+                backgroundColor: Colors.blue,
+                icon: Icon(Icons.perm_identity),
+                title: Text('Opciones') //ICONO RESERVACIONES
                 )
           ],
         ),

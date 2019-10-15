@@ -14,6 +14,7 @@ class Invitaciones extends StatefulWidget {
   Widget build(BuildContext context) {
      return Container(
        color: Colors.green,
+      
      );
   }
   }
